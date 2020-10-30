@@ -1,0 +1,8 @@
+node_modules
+.vscode/
+# ignore codecoverage output
+coverage/
+# ignore cli binary output
+cli/
+# ignore dist/ output
+dist/

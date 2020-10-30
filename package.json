@@ -1,0 +1,137 @@
+{
+  "name": "ts-node-template",
+  "repository": "git@github.com:gagoar/codeowners-generator.git",
+  "license": "MIT",
+  "version": "1.3.0",
+  "description": "ts node template description",
+  "main": "dist/index.js",
+  "bin": {
+    "ts-node-template-ci": "cli/index.js"
+  },
+  "scripts": {
+    "precommit": "lint-staged",
+    "test": "jest",
+    "build-cli": "ncc build ./src/bin/cli.ts -o cli",
+    "build": "ncc build ./index.ts -o dist",
+    "lint": "eslint src/* --ext .ts",
+    "version": "auto-changelog -p && git add CHANGELOG.md",
+    "release": "npm run build && npm run build-cli && npm publish"
+  },
+  "engines": {
+    "node": ">10.0.0"
+  },
+  "keywords": [
+    "cli",
+    "template",
+    "node"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*": [
+      "pretty-quick --staged"
+    ],
+    "*.ts": [
+      "eslint --fix",
+      "bash -c \"npm run build\""
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "semi": true,
+    "printWidth": 120
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:@typescript-eslint/recommended",
+      "prettier",
+      "prettier/@typescript-eslint"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "project": "./tsconfig.eslint.json"
+    },
+    "rules": {
+      "quotes": [
+        2,
+        "single",
+        "avoid-escape"
+      ],
+      "no-debugger": "error",
+      "no-process-env": "off",
+      "import/prefer-default-export": "off",
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          "vars": "all",
+          "args": "after-used",
+          "ignoreRestSiblings": true
+        }
+      ],
+      "new-cap": [
+        "error",
+        {
+          "capIsNewExceptions": [
+            "Injectable",
+            "Inject"
+          ]
+        }
+      ],
+      "prefer-destructuring": [
+        "error",
+        {
+          "VariableDeclarator": {
+            "array": false,
+            "object": true
+          },
+          "AssignmentExpression": {
+            "array": true,
+            "object": false
+          }
+        },
+        {
+          "enforceForRenamedProperties": false
+        }
+      ]
+    }
+  },
+  "author": "Gago <xeroice@gmail.com>",
+  "dependencies": {
+    "commander": "6.2.0",
+    "cosmiconfig": "7.0.0",
+    "debug": "4.2.0",
+    "ora": "5.1.0"
+  },
+  "devDependencies": {
+    "@types/debug": "4.1.5",
+    "@types/jest": "26.0.15",
+    "@types/node": "13.13.30",
+    "@typescript-eslint/eslint-plugin": "4.5.0",
+    "@typescript-eslint/parser": "4.5.0",
+    "@zeit/ncc": "0.22.3",
+    "ajv-keywords": "3.5.2",
+    "auto-changelog": "2.2.1",
+    "bufferutil": "4.0.1",
+    "canvas": "2.6.1",
+    "eslint": "7.12.1",
+    "eslint-config-prettier": "6.15.0",
+    "husky": "4.3.0",
+    "jest": "26.6.1",
+    "jest-mock-process": "1.4.0",
+    "lint-staged": "10.5.0",
+    "ncc": "0.3.6",
+    "prettier": "2.1.2",
+    "prettier-eslint": "11.0.0",
+    "prettier-eslint-cli": "5.0.0",
+    "pretty-quick": "3.1.0",
+    "ts-jest": "26.4.3",
+    "ts-node": "9.0.0",
+    "tslib": "2.0.3",
+    "typescript": "4.0.5",
+    "utf-8-validate": "5.0.2"
+  }
+}
