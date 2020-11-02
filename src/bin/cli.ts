@@ -12,10 +12,15 @@ program
     '--installationId <installationId>',
     'for more information https://developer.github.com/v3/apps/#list-installations-for-the-authenticated-app'
   )
-  .requiredOption(
-    '--privateKey <privateKey>',
+  .option(
+    '--privateKey [privateKey]',
     'for more information https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#generating-a-private-key'
   )
+  .option(
+    '--privateKeyLocation [path/to/the/private.key]',
+    'path to the key location, for more information https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#generating-a-private-key '
+  )
+
   .action(getTokenCommand);
 
 program.parse(process.argv);

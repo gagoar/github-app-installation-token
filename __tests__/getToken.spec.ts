@@ -1,9 +1,9 @@
 import { mockProcessExit } from 'jest-mock-process';
+import { readFileSync } from 'fs';
 import { stopAndPersist, fail } from '../__mocks__/ora';
 import nock from 'nock';
 
 import { getToken, getTokenCommand } from '../';
-import { readFileSync } from 'fs';
 const GITHUB_URL = 'https://api.github.com';
 
 describe('getToken', () => {
@@ -13,7 +13,9 @@ describe('getToken', () => {
   });
 
   const APP_ID = 1;
-  const PRIVATE_KEY = readFileSync('__mocks__/private.key').toString();
+  const KEY_LOCATION = '__mocks__/private.key';
+
+  const PRIVATE_KEY = readFileSync(KEY_LOCATION).toString();
 
   const getAccessTokensURL = (installationID: number) => `/app/installations/${installationID}/access_tokens`;
   const installationID = 1234;
@@ -85,5 +87,43 @@ describe('getToken', () => {
     expect(mockExit).not.toHaveBeenCalled();
     expect(stopAndPersist).toHaveBeenCalledTimes(1);
     expect(github.isDone()).toBe(true);
+  });
+
+  it('invokes getToken via command providing a private.key location', async () => {
+    const github = nock(GITHUB_URL).post(getAccessTokensURL(installationID)).reply(201, response);
+
+    const mockExit = mockProcessExit();
+    await getTokenCommand({
+      appId: APP_ID,
+      installationId: installationID,
+      privateKeyLocation: KEY_LOCATION,
+    });
+
+    expect(mockExit).not.toHaveBeenCalled();
+    expect(stopAndPersist).toHaveBeenCalledTimes(1);
+    expect(stopAndPersist.mock.calls).toMatchInlineSnapshot(`
+      Array [
+        Array [
+          Object {
+            "symbol": "💫",
+            "text": "The token is: secret-installation-token-1234",
+          },
+        ],
+      ]
+    `);
+    expect(github.isDone()).toBe(true);
+  });
+
+  it('invokes getToken via command not providing a private.key or private.keyLocation', async () => {
+    const mockExit = mockProcessExit();
+    await getTokenCommand({
+      appId: APP_ID,
+      installationId: installationID,
+    });
+
+    expect(mockExit).toHaveBeenCalled();
+    expect(fail.mock.calls[0][0]).toMatchInlineSnapshot(
+      '"Input is not valid, either privateKey or privateKeyLocation should be provided"'
+    );
   });
 });

@@ -43,21 +43,30 @@ export const getToken = async (
   return { token };
 };
 
-interface Input extends GetTokenInput {
-  privateKeyFile?: string;
-}
+type Input = Omit<GetTokenInput, 'privateKey'> & { privateKeyLocation?: string; privateKey?: string };
+
+const isValidInput = (input: Input): boolean => {
+  return !!(input.privateKey || input.privateKeyLocation);
+};
 export const command = async (input: Input): Promise<void> => {
   debug('input:', input);
 
   const loader = ora('Retrieving token...').start();
 
   try {
-    let { privateKey } = input;
+    let privateKey: string;
 
-    const { privateKeyFile, installationId, appId } = input;
+    const { privateKeyLocation, installationId, appId } = input;
 
-    if (!privateKey && privateKeyFile) {
-      privateKey = await readContent(privateKeyFile);
+    if (!isValidInput(input)) {
+      loader.fail('Input is not valid, either privateKey or privateKeyLocation should be provided');
+      process.exit(1);
+    }
+
+    if (!input.privateKey && privateKeyLocation) {
+      privateKey = await readContent(privateKeyLocation);
+    } else {
+      privateKey = input.privateKey as string;
     }
 
     const { token } = await getToken({ privateKey, installationId, appId });
