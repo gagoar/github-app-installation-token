@@ -3,7 +3,7 @@ import { readFileSync } from 'fs';
 import { stopAndPersist, fail } from '../__mocks__/ora';
 import nock from 'nock';
 
-import { getToken, getTokenCommand } from '../';
+import { getToken, getTokenCommand } from '../src/index';
 const GITHUB_URL = 'https://api.github.com';
 
 describe('getToken', () => {
