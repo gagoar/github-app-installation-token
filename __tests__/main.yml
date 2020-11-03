@@ -1,4 +1,4 @@
-name: Validation on Master
+name: Validation on Main
 
 on:
   push:
