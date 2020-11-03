@@ -62,3 +62,9 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build-cli
+      - name: use Cli
+        run: |
+          cli/index.js \
+             --appId ${{ secrets.APP_ID }} \
+             --installationId ${{ secrets.INSTALLATION_ID }} \
+             --privateKey ${{ secrets.PRIVATE_KEY }}
