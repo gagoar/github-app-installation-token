@@ -46,7 +46,10 @@ You can install and use this package in different ways:
 ### NPX
 
 ```bash
-  npx github-app-installation-token --appID <APP_ID> --installationId <INSTALLATION_ID> --privateKeyLocation <path/to/the/private.key>
+   npx github-app-installation-token \
+      --appID <APP_ID> \
+      --installationId <INSTALLATION_ID> \
+      --privateKeyLocation <path/to/the/private.key>
 ```
 
 ### NPM (global)
@@ -54,7 +57,10 @@ You can install and use this package in different ways:
 ```bash
   npm -g install github-app-installation-token
 
-  npm run github-app-installation-token --appID <APP_ID> --installationId <INSTALLATION_ID> --privateKeyLocation <path/to/the/private.key>
+  npm run github-app-installation-token \
+      --appID <APP_ID> \
+      --installationId <INSTALLATION_ID> \
+      --privateKeyLocation <path/to/the/private.key>
 ```
 
 ### YARN (global)
@@ -62,7 +68,10 @@ You can install and use this package in different ways:
 ```bash
   yarn global install github-app-installation-token
 
-  yarn github-app-installation-token --appID <APP_ID> --installationId <INSTALLATION_ID> --privateKeyLocation <path/to/the/private.key>
+  yarn github-app-installation-token \
+      --appID <APP_ID> \
+      --installationId <INSTALLATION_ID> \
+      --privateKeyLocation <path/to/the/private.key>
 ```
 
 ### Programmatically
