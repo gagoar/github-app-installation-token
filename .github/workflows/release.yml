@@ -55,7 +55,7 @@ jobs:
           asset_path: ./macosx.zip
           asset_name: macosx.zip
           asset_content_type: application/zip
-      - name: Upload Release Asset - linux
+      - name: Upload Release Asset - LINUX
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
