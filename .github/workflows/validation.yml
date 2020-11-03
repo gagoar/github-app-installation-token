@@ -67,4 +67,6 @@ jobs:
           cli/index.js \
              --appId ${{ secrets.APP_ID }} \
              --installationId ${{ secrets.INSTALLATION_ID }} \
-             --privateKey ${{ secrets.PRIVATE_KEY }}
+             --privateKey cat << EndOfMessage
+                ${{ secrets.PRIVATE_KEY }} 
+              EndOfMessage
