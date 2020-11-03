@@ -64,7 +64,8 @@ jobs:
         run: npm run build-cli
       - name: use Cli
         run: |
+          export PRIVATE_KEY=${{secrets.PRIVATE_KEY}}
           cli/cli.js \
-             --appId=${{ secrets.APP_ID }} \
-             --installationId=${{ secrets.INSTALLATION_ID }} \
-             --privateKey=${{ secrets.PRIVATE_KEY }}
+             --appId ${{ secrets.APP_ID }} \
+             --installationId ${{ secrets.INSTALLATION_ID }} \
+             --privateKey=$PRIVATE_KEY
