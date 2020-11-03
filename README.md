@@ -49,7 +49,7 @@ You can install and use this package in different ways:
    npx github-app-installation-token \
       --appId <APP_ID> \
       --installationId <INSTALLATION_ID> \
-      --privateKeyLocation <path/to/the/private.key>
+      --privateKeyLocation <path/to/the/private.pem>
 ```
 
 ### NPM (global)
@@ -60,7 +60,7 @@ You can install and use this package in different ways:
   npm run github-app-installation-token \
       --appID <APP_ID> \
       --installationId <INSTALLATION_ID> \
-      --privateKeyLocation <path/to/the/private.key>
+      --privateKeyLocation <path/to/the/private.pem>
 ```
 
 ### YARN (global)
@@ -71,7 +71,7 @@ You can install and use this package in different ways:
   yarn github-app-installation-token \
       --appId <APP_ID> \
       --installationId <INSTALLATION_ID> \
-      --privateKeyLocation <path/to/the/private.key>
+      --privateKeyLocation <path/to/the/private.pem>
 ```
 
 ### Programmatically
