@@ -66,9 +66,9 @@ You can install and use this package in different ways:
 ### YARN (global)
 
 ```bash
-  yarn global install github-app-installation-token
+  yarn global add github-app-installation-token
 
-  yarn github-app-installation-token \
+  github-app-installation-token \
       --appId <APP_ID> \
       --installationId <INSTALLATION_ID> \
       --privateKeyLocation <path/to/the/private.pem>
@@ -77,7 +77,7 @@ You can install and use this package in different ways:
 ### Programmatically
 
 ```typescript
-import { getToken } from  'github-app-installation-token';
+import { getToken } from 'github-app-installation-token';
 
 const { token } = await getToken({
   appId: '1234',
@@ -90,7 +90,7 @@ const { token } = await getToken({
 
 If you don't want any dependencies, you can use the binary directly.
 
-Head over to [releases](https://github.com/gagoar/github-app-installation-token/releases/latest) and pick the binary for linux, macos and windows.
+Head over to [releases](https://github.com/gagoar/github-app-installation-token/releases/latest) and pick the binary for LINUX, MACOSX and WINDOWS.
 
 ### Github Workflow
 
@@ -98,7 +98,8 @@ If you are looking for a solution for your GitHub workflows, take a look at [git
 
 ## Built With
 
-- [ncc](https://github.com/vercel/ncc/)
+- [esbuild](https://github.com/evanw/esbuild)
+- [pkg](https://github.com/vercel/pkg)
 - [jest](https://github.com/facebook/jest)
 - [ora](https://github.com/sindresorhus/ora)
 - [commander](https://github.com/tj/commander.js/)
