@@ -1,1 +1,1 @@
-export { command as greetCommand, greet } from './greet';
+export { command as getTokenCommand, getToken } from './getToken';

@@ -6,3 +6,5 @@ coverage/
 cli/
 # ignore dist/ output
 dist/
+# ignoring binaries
+index-*
