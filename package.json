@@ -12,8 +12,9 @@
     "preinstall": "npx npm-force-resolutions",
     "precommit": "lint-staged",
     "test": "jest",
-    "build-cli": "ncc build ./src/bin/cli.ts -o cli",
     "build": "ncc build ./index.ts -o dist",
+    "build-cli": "ncc build ./src/bin/cli.ts -o cli",
+    "build-binaries": "pkg cli/index.js",
     "lint": "eslint src/* --ext .ts",
     "version": "auto-changelog -p && git add CHANGELOG.md",
     "release": "npm run build && npm run build-cli && npm publish"
@@ -109,7 +110,8 @@
     "@octokit/rest": "18.0.7",
     "commander": "6.2.0",
     "debug": "4.2.0",
-    "ora": "5.1.0"
+    "ora": "5.1.0",
+    "pkg": "^4.4.9"
   },
   "resolutions": {
     "@octokit/request": "5.4.7",
