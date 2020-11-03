@@ -3,7 +3,7 @@ name: Validation on Master
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   test:
     name: Run unit tests
