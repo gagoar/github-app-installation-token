@@ -24,9 +24,9 @@ jobs:
       - run: npm run build-binaries
       - name: Zip binaries
         run: |
-          zip zip --junk-paths linux cli-linux 
-          zip zip --junk-paths macosx cli-macos
-          zip zip --junk-paths win cli-win.exe
+          zip --junk-paths linux cli-linux 
+          zip --junk-paths macosx cli-macos
+          zip --junk-paths win cli-win.exe
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
