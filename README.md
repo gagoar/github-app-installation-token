@@ -2,19 +2,19 @@
     <a href="https://codecov.io/gh/gagoar/github-app-installation-token">
       <img src="https://codecov.io/gh/gagoar/github-app-installation-token/branch/main/graph/badge.svg?token=E9CdygqJc4"/>
     </a>
-    <a href="https://github.com/gagoar/alohomora/blob/master/LICENSE">
-      <img src="https://img.shields.io/npm/l/alohomora.svg?style=flat-square" alt="MIT license" />
+    <a href="https://github.com/gagoar/github-app-installation-token/blob/master/LICENSE">
+      <img src="https://img.shields.io/npm/l/github-app-installation-token.svg?style=flat-square" alt="MIT license" />
     </a>
   <h3 align="center">Github App Installation Token</h3>
 
   <p align="center">
       npm/script and binary 📦 to get generate a token from a GitHub App. 
     <br />
-    <a href="https://github.com/gagoar/ts-node-template#table-of-contents"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/gagoar/github-app-installation-token#table-of-contents"><strong>Explore the docs »</strong></a>
     <br />
-    <a href="https://github.com/gagoar/ts-node-template/issues">Report Bug</a>
+    <a href="https://github.com/gagoar/github-app-installation-token/issues">Report Bug</a>
     ·
-    <a href="https://github.com/gagoar/ts-node-template/issues">Request Feature</a>
+    <a href="https://github.com/gagoar/github-app-installation-token/issues">Request Feature</a>
   </p>
 </p>
 
