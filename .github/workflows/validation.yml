@@ -65,6 +65,6 @@ jobs:
       - name: use Cli
         run: |
           cli/cli.js \
-             --appId ${{ secrets.APP_ID }} \
-             --installationId ${{ secrets.INSTALLATION_ID }} \
-             --privateKey cat << EndOfMessage ${{ secrets.PRIVATE_KEY }} EndOfMessage
+             --appId=${{ secrets.APP_ID }} \
+             --installationId=${{ secrets.INSTALLATION_ID }} \
+             --privateKey=${{ secrets.PRIVATE_KEY }}
