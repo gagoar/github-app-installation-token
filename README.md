@@ -1,4 +1,10 @@
 <p align="center">
+    <a href="https://codecov.io/gh/gagoar/github-app-installation-token">
+      <img src="https://codecov.io/gh/gagoar/github-app-installation-token/branch/main/graph/badge.svg?token=E9CdygqJc4"/>
+    </a>
+    <a href="https://github.com/gagoar/alohomora/blob/master/LICENSE">
+      <img src="https://img.shields.io/npm/l/alohomora.svg?style=flat-square" alt="MIT license" />
+    </a>
   <h3 align="center">Github App Installation Token</h3>
 
   <p align="center">
