@@ -86,7 +86,7 @@ const { token } = await getToken({
 });
 ```
 
-#### Binary
+### Binary
 
 If you don't want any dependencies, you can use the binary directly.
 
