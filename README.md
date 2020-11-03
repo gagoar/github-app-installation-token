@@ -8,7 +8,7 @@
   <h3 align="center">Github App Installation Token</h3>
 
   <p align="center">
-      npm/script and binary 📦 to get generate a token from a GitHub App. 
+      npm/cli and binary 📦 to generate a token from GitHub Apps. 
     <br />
     <a href="https://github.com/gagoar/github-app-installation-token#table-of-contents"><strong>Explore the docs »</strong></a>
     <br />
