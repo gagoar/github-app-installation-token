@@ -6,15 +6,14 @@
   "description": "ts node template description",
   "main": "dist/index.js",
   "bin": {
-    "github-app-installation-token": "cli/index.js"
+    "github-app-installation-token": "cli/cli.js"
   },
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
     "precommit": "lint-staged",
     "test": "jest",
-    "build": "ncc build ./index.ts -o dist",
-    "build-cli": "ncc build ./src/bin/cli.ts -o cli",
-    "build-binaries": "pkg cli/index.js",
+    "build": "esbuild --bundle ./index.ts --platform=node --target=node12 --main-fields=main --outdir=dist/",
+    "build-cli": "esbuild --bundle src/bin/cli.ts --platform=node --target=node12 --main-fields=main --outdir=cli/",
+    "build-binaries": "pkg cli/cli.js",
     "lint": "eslint src/* --ext .ts",
     "version": "auto-changelog -p && git add CHANGELOG.md",
     "release": "npm run build && npm run build-cli && npm publish"
@@ -104,38 +103,34 @@
   },
   "author": "Gago <xeroice@gmail.com>",
   "dependencies": {
-    "@octokit/auth-app": "2.0.0",
-    "@octokit/endpoint": "6.0.5",
-    "@octokit/request": "5.4.7",
-    "@octokit/rest": "18.0.7",
+    "@octokit/auth-app": "2.8.0",
+    "@octokit/rest": "18.0.9",
     "commander": "6.2.0",
     "debug": "4.2.0",
-    "ora": "5.1.0",
-    "pkg": "^4.4.9"
-  },
-  "resolutions": {
-    "@octokit/request": "5.4.7",
-    "@octokit/endpoint": "6.0.5"
+    "node-rsa": "1.1.1",
+    "ora": "5.1.0"
   },
   "devDependencies": {
+    "@types/nock": "^11.1.0",
     "@types/debug": "4.1.5",
     "@types/jest": "26.0.15",
     "@types/node": "13.13.30",
+    "@types/node-rsa": "1.0.0",
     "@typescript-eslint/eslint-plugin": "4.5.0",
     "@typescript-eslint/parser": "4.5.0",
-    "@zeit/ncc": "0.22.3",
     "ajv-keywords": "3.5.2",
     "auto-changelog": "2.2.1",
     "bufferutil": "4.0.1",
     "canvas": "2.6.1",
+    "esbuild": "^0.8.2",
     "eslint": "7.12.1",
     "eslint-config-prettier": "6.15.0",
     "husky": "4.3.0",
     "jest": "26.6.1",
     "jest-mock-process": "^1.4.0",
     "lint-staged": "10.5.0",
-    "ncc": "0.3.6",
     "nock": "^13.0.4",
+    "pkg": "^4.4.9",
     "prettier": "2.1.2",
     "prettier-eslint": "11.0.0",
     "prettier-eslint-cli": "5.0.0",

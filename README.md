@@ -47,7 +47,7 @@ You can install and use this package in different ways:
 
 ```bash
    npx github-app-installation-token \
-      --appID <APP_ID> \
+      --appId <APP_ID> \
       --installationId <INSTALLATION_ID> \
       --privateKeyLocation <path/to/the/private.key>
 ```
@@ -69,7 +69,7 @@ You can install and use this package in different ways:
   yarn global install github-app-installation-token
 
   yarn github-app-installation-token \
-      --appID <APP_ID> \
+      --appId <APP_ID> \
       --installationId <INSTALLATION_ID> \
       --privateKeyLocation <path/to/the/private.key>
 ```

@@ -3,7 +3,7 @@ import { readFileSync } from 'fs';
 import { stopAndPersist, fail } from '../__mocks__/ora';
 import nock from 'nock';
 
-import { getToken, getTokenCommand } from '../';
+import { getToken, getTokenCommand } from '../src/index';
 const GITHUB_URL = 'https://api.github.com';
 
 describe('getToken', () => {
@@ -38,8 +38,8 @@ describe('getToken', () => {
         privateKey: PRIVATE_KEY,
       });
     } catch (e) {
-      expect(e).toMatchInlineSnapshot(
-        '[Error: Something went wrong on the token retrieval, we got instead: {"type":"token","tokenType":"installation","installationId":1234,"permissions":{"metadata":"read"},"expiresAt":"1970-01-01T01:00:00.000Z","repositorySelection":"all"}]'
+      expect(e.message).toMatchInlineSnapshot(
+        '"Something went wrong on the token retrieval, enable debug to inspect further"'
       );
     }
 

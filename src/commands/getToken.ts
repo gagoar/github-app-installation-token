@@ -3,6 +3,7 @@ import { Octokit } from '@octokit/rest';
 import { request as Request } from '@octokit/request';
 import { RequestRequestOptions } from '@octokit/types';
 import { createAppAuth } from '@octokit/auth-app';
+import NodeRSA from 'node-rsa';
 
 import { SUCCESS_SYMBOL } from '../utils/constants';
 import { logger } from '../utils/debug';
@@ -21,11 +22,14 @@ export const getToken = async (
   { appId, installationId, privateKey }: GetTokenInput,
   request: RequestRequestOptions = Request
 ): Promise<{ token: string }> => {
+  const key = new NodeRSA(privateKey);
+
   const octokit = new Octokit({
     authStrategy: createAppAuth,
     auth: {
+      appId,
       id: appId,
-      privateKey,
+      privateKey: key.exportKey('pkcs8-private-pem'),
     },
     request,
   });
@@ -36,7 +40,8 @@ export const getToken = async (
   });
 
   if (!isAppsCreateInstallationAccessTokenResponseData(response)) {
-    throw new Error(`Something went wrong on the token retrieval, we got instead: ${JSON.stringify(response)}`);
+    debug(`response is missing the token, we got ${response}`);
+    throw new Error('Something went wrong on the token retrieval, enable debug to inspect further');
   }
   const { token } = response;
 
