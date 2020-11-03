@@ -41,7 +41,7 @@ This npm package / command line tool / binary will do just that!
 
 ## Installation and Use
 
-you can install and use this package in different ways:
+You can install and use this package in different ways:
 
 ### NPX
 
@@ -111,7 +111,3 @@ Contributions are what makes the open-source community such an amazing place to 
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
-
-```
-
-```
