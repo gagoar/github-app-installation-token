@@ -2,7 +2,7 @@
   "name": "github-app-installation-token",
   "repository": "git@github.com:gagoar/github-app-installation-token.git",
   "license": "MIT",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "ts node template description",
   "main": "dist/index.js",
   "bin": {
