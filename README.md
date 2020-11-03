@@ -77,7 +77,7 @@ You can install and use this package in different ways:
 ### Programmatically
 
 ```typescript
-const { getToken } = 'github-app-installation-token';
+import { getToken } from  'github-app-installation-token';
 
 const { token } = await getToken({
   appId: '1234',
