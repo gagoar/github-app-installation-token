@@ -90,7 +90,7 @@ const { token } = await getToken({
 
 If you don't want any dependencies, you can use the binary directly.
 
-_commit soon_
+Head over to [releases](https://github.com/gagoar/github-app-installation-token/releases/latest) and pick the binary for linux, macos and windows.
 
 ### Github Workflow
 
