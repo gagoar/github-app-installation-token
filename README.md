@@ -1,4 +1,7 @@
 <p align="center">
+    <a href="https://www.npmjs.com/package/github-app-installation-token">
+      <img src="https://img.shields.io/npm/v/github-app-installation-token/latest.svg?style=flat-square" alt="NPM Version" />
+    </a>
     <a href="https://codecov.io/gh/gagoar/github-app-installation-token">
       <img src="https://codecov.io/gh/gagoar/github-app-installation-token/branch/main/graph/badge.svg?token=E9CdygqJc4"/>
     </a>
