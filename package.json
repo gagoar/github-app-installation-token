@@ -18,7 +18,7 @@
     "build-types": "tsc --emitDeclarationOnly --outDir types",
     "lint": "eslint src/* --ext .ts",
     "version": "auto-changelog -p && git add CHANGELOG.md",
-    "release": "npm run build && npm run build-cli && npm publish"
+    "release": "npm run build && npm run build-cli && npm run build-binaries && npm run build-types && npm publish"
   },
   "engines": {
     "node": ">10.0.0"

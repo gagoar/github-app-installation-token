@@ -16,10 +16,7 @@ jobs:
           node-version: '12.x'
           registry-url: 'https://registry.npmjs.org'
       - run: npm install
-      - run: npm run build
-      - run: npm run build-cli
-      - run: npm run build-types
-      - run: npm publish
+      - run: npm release
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: npm run build-binaries
