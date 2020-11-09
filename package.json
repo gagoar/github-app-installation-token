@@ -5,6 +5,7 @@
   "version": "1.0.2",
   "description": "npm/script and binary 📦 to get a token from a GitHub App.",
   "main": "dist/index.js",
+  "types": "types/index.d.ts",
   "bin": {
     "github-app-installation-token": "cli/cli.js"
   },
@@ -14,6 +15,7 @@
     "build": "esbuild --bundle ./index.ts --platform=node --target=node12 --main-fields=main --outdir=dist/",
     "build-cli": "esbuild --bundle src/bin/cli.ts --platform=node --target=node12 --main-fields=main --outdir=cli/",
     "build-binaries": "pkg cli/cli.js",
+    "build-types": "tsc --emitDeclarationOnly --outDir types",
     "lint": "eslint src/* --ext .ts",
     "version": "auto-changelog -p && git add CHANGELOG.md",
     "release": "npm run build && npm run build-cli && npm publish"
@@ -111,9 +113,9 @@
     "ora": "5.1.0"
   },
   "devDependencies": {
-    "@types/nock": "11.1.0",
     "@types/debug": "4.1.5",
     "@types/jest": "26.0.15",
+    "@types/nock": "11.1.0",
     "@types/node": "13.13.30",
     "@types/node-rsa": "1.0.0",
     "@typescript-eslint/eslint-plugin": "4.5.0",

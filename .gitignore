@@ -8,3 +8,5 @@ cli/
 dist/
 # ignoring binaries
 cli-*
+# ignore types generation
+types/
