@@ -1,13 +1,24 @@
 import { mockProcessExit } from 'jest-mock-process';
 import { readFileSync } from 'fs';
 import { stopAndPersist, fail } from '../__mocks__/ora';
+import { mockConsole, unMockConsole } from './helper';
 import nock from 'nock';
 
 import { getToken, getTokenCommand } from '../src/index';
+
 const GITHUB_URL = 'https://api.github.com';
 
 describe('getToken', () => {
+  let consoleLogMock: jest.Mock;
+  beforeAll(() => {
+    consoleLogMock = mockConsole('log');
+  });
+
+  afterAll(() => {
+    unMockConsole('log');
+  });
   beforeEach(() => {
+    consoleLogMock.mockReset();
     stopAndPersist.mockReset();
     fail.mockReset();
   });
@@ -27,6 +38,7 @@ describe('getToken', () => {
     },
     repository_selection: 'all',
   };
+
   it('It tries to get the token, but it gets a malformed response from Github', async () => {
     const { token, ...responseWithoutToken } = response;
     const github = nock(GITHUB_URL).post(getAccessTokensURL(installationID)).reply(201, responseWithoutToken);
@@ -84,6 +96,13 @@ describe('getToken', () => {
       privateKey: PRIVATE_KEY,
     });
 
+    expect(consoleLogMock.mock.calls).toMatchInlineSnapshot(`
+      Array [
+        Array [
+          "secret-installation-token-1234",
+        ],
+      ]
+    `);
     expect(mockExit).not.toHaveBeenCalled();
     expect(stopAndPersist).toHaveBeenCalledTimes(1);
     expect(github.isDone()).toBe(true);

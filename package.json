@@ -3,7 +3,7 @@
   "repository": "git@github.com:gagoar/github-app-installation-token.git",
   "license": "MIT",
   "version": "1.0.2",
-  "description": "npm/script and binary 📦 to get a token from a GitHub App.",
+  "description": "npm/script and binary 📦 to get a token from a GitHub App",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
   "bin": {
@@ -120,10 +120,7 @@
     "@types/node-rsa": "1.0.0",
     "@typescript-eslint/eslint-plugin": "4.8.1",
     "@typescript-eslint/parser": "4.8.1",
-    "ajv-keywords": "3.5.2",
     "auto-changelog": "2.2.1",
-    "bufferutil": "4.0.2",
-    "canvas": "2.6.1",
     "esbuild": "0.8.9",
     "eslint": "7.13.0",
     "eslint-config-prettier": "6.15.0",
@@ -140,7 +137,6 @@
     "ts-jest": "26.4.4",
     "ts-node": "9.0.0",
     "tslib": "2.0.3",
-    "typescript": "4.0.5",
-    "utf-8-validate": "5.0.3"
+    "typescript": "4.0.5"
   }
 }
