@@ -3,7 +3,7 @@
   "repository": "git@github.com:gagoar/github-app-installation-token.git",
   "license": "MIT",
   "version": "1.0.2",
-  "description": "npm/script and binary 📦 to get a token from a GitHub App.",
+  "description": "npm/script and binary 📦 to get a token from a GitHub App",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
   "bin": {
