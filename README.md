@@ -8,6 +8,8 @@
     <a href="https://github.com/gagoar/github-app-installation-token/blob/main/LICENSE">
       <img src="https://img.shields.io/npm/l/github-app-installation-token.svg?style=flat-square" alt="MIT license" />
     </a>
+    <a href="https://deepsource.io/gh/gagoar/github-app-installation-token/?ref=repository-badge" target="_blank"><img alt="DeepSource" title="DeepSource" src="https://deepsource.io/gh/gagoar/github-app-installation-token.svg/?label=active+issues&show_trend=true"/>
+    </a>
   <h3 align="center">Github App Installation Token</h3>
 
   <p align="center">
