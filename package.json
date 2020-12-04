@@ -106,7 +106,7 @@
   "author": "Gago <xeroice@gmail.com>",
   "dependencies": {
     "@octokit/auth-app": "2.8.0",
-    "@octokit/rest": "18.0.9",
+    "@octokit/rest": "18.0.12",
     "commander": "6.2.0",
     "debug": "4.3.1",
     "node-rsa": "1.1.1",
