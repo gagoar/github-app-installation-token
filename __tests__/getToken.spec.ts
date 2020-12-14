@@ -30,15 +30,26 @@ describe('getToken', () => {
 
   const getAccessTokensURL = (installationID: number) => `/app/installations/${installationID}/access_tokens`;
   const installationID = 1234;
+  // The response object has to be in snake_case because is how the API returns fields, octokit will camelCase every field
   const response = {
-    token: `secret-installation-token-${installationID}`,
-    expires_at: '1970-01-01T01:00:00.000Z',
+    type: 'token',
+    token_type: 'installation',
+    token: 'secret-installation-token-1234',
+    installation_id: 12400204,
     permissions: {
+      actions: 'write',
+      administration: 'admin',
+      checks: 'write',
+      contents: 'write',
+      issues: 'write',
       metadata: 'read',
+      pull_requests: 'write',
+      statuses: 'admin',
     },
+    created_at: new Date('2020-12-14').toDateString(),
+    expires_at: new Date('2020-12-15').toDateString(),
     repository_selection: 'all',
   };
-
   it('It tries to get the token, but it gets a malformed response from Github', async () => {
     const { token, ...responseWithoutToken } = response;
     const github = nock(GITHUB_URL).post(getAccessTokensURL(installationID)).reply(201, responseWithoutToken);
@@ -58,11 +69,11 @@ describe('getToken', () => {
     expect(github.isDone()).toBe(true);
   });
   it('Retrieves the token', async () => {
-    const github = nock(GITHUB_URL).post(getAccessTokensURL(installationID)).reply(201, response);
+    const github = nock(GITHUB_URL).post(getAccessTokensURL(123456)).reply(201, response);
 
     const { token } = await getToken({
       appId: APP_ID,
-      installationId: installationID,
+      installationId: 123456,
       privateKey: PRIVATE_KEY,
     });
 
@@ -108,6 +119,31 @@ describe('getToken', () => {
     expect(github.isDone()).toBe(true);
   });
 
+  it('invokes getToken via command providing a private.key location(with raw Response)', async () => {
+    const github = nock(GITHUB_URL).post(getAccessTokensURL(installationID)).reply(201, response);
+
+    const mockExit = mockProcessExit();
+    await getTokenCommand({
+      appId: APP_ID,
+      installationId: installationID,
+      privateKeyLocation: KEY_LOCATION,
+      rawResponse: true,
+    });
+
+    expect(mockExit).not.toHaveBeenCalled();
+    expect(stopAndPersist).toHaveBeenCalledTimes(1);
+    expect(stopAndPersist.mock.calls).toMatchInlineSnapshot(`
+      Array [
+        Array [
+          Object {
+            "symbol": "💫",
+            "text": "The token is: secret-installation-token-1234 and expires Tue Dec 15 2020",
+          },
+        ],
+      ]
+    `);
+    expect(github.isDone()).toBe(true);
+  });
   it('invokes getToken via command providing a private.key location', async () => {
     const github = nock(GITHUB_URL).post(getAccessTokensURL(installationID)).reply(201, response);
 
@@ -125,7 +161,7 @@ describe('getToken', () => {
         Array [
           Object {
             "symbol": "💫",
-            "text": "The token is: secret-installation-token-1234",
+            "text": "The token is: secret-installation-token-1234 and expires Tue Dec 15 2020",
           },
         ],
       ]

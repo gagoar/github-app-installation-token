@@ -1,14 +1,17 @@
 import ora from 'ora';
 import { Octokit } from '@octokit/rest';
-import { request as Request } from '@octokit/request';
 import { RequestRequestOptions } from '@octokit/types';
 import { createAppAuth } from '@octokit/auth-app';
 import NodeRSA from 'node-rsa';
 
 import { SUCCESS_SYMBOL } from '../utils/constants';
 import { logger } from '../utils/debug';
-import { isAppsCreateInstallationAccessTokenResponseData } from '../utils/guards';
+import {
+  AppsCreateInstallationAccessTokenResponse,
+  isAppsCreateInstallationAccessTokenResponse,
+} from '../utils/guards';
 import { readContent } from '../utils/readFile';
+import { Command } from 'commander';
 
 const debug = logger('generate');
 // just left the async signature to make it easier in the future
@@ -17,12 +20,31 @@ interface GetTokenInput {
   installationId: number;
   privateKey: string;
 }
+type RequestOptions = RequestRequestOptions & Required<{ rawResponse: true }>;
+type PlainRequest = RequestRequestOptions & { rawResponse?: false };
 
-export const getToken = async (
+export async function getToken(
   { appId, installationId, privateKey }: GetTokenInput,
-  request: RequestRequestOptions = Request
-): Promise<{ token: string }> => {
+  requestOptions: RequestOptions
+): Promise<AppsCreateInstallationAccessTokenResponse>;
+export async function getToken(
+  { appId, installationId, privateKey }: GetTokenInput,
+  requestOptions?: PlainRequest
+): Promise<Pick<AppsCreateInstallationAccessTokenResponse, 'token'>>;
+export async function getToken(
+  { appId, installationId, privateKey }: GetTokenInput,
+  requestOptions?: PlainRequest | RequestOptions
+): Promise<Pick<AppsCreateInstallationAccessTokenResponse, 'token'> | AppsCreateInstallationAccessTokenResponse> {
   const key = new NodeRSA(privateKey);
+
+  let request: Request;
+
+  if (requestOptions?.rawResponse) {
+    const { rawResponse: _rawResponse, ...rest } = requestOptions;
+    request = rest as Request;
+  } else {
+    request = requestOptions as Request;
+  }
 
   const octokit = new Octokit({
     authStrategy: createAppAuth,
@@ -39,20 +61,24 @@ export const getToken = async (
     installationId,
   });
 
-  if (!isAppsCreateInstallationAccessTokenResponseData(response)) {
+  if (!isAppsCreateInstallationAccessTokenResponse(response)) {
     debug(`response is missing the token, we got ${response}`);
     throw new Error('Something went wrong on the token retrieval, enable debug to inspect further');
   }
-  const { token } = response;
 
-  return { token };
+  return requestOptions?.rawResponse ? response : { token: response.token };
+}
+
+type Input = Omit<Command & GetTokenInput, 'privateKey'> & {
+  privateKeyLocation?: string;
+  privateKey?: string;
+  rawResponse?: boolean;
 };
-
-type Input = Omit<GetTokenInput, 'privateKey'> & { privateKeyLocation?: string; privateKey?: string };
 
 const isValidInput = (input: Input): boolean => {
   return !!(input.privateKey || input.privateKeyLocation);
 };
+
 export const command = async (input: Input): Promise<void> => {
   debug('input:', input);
 
@@ -61,7 +87,7 @@ export const command = async (input: Input): Promise<void> => {
   try {
     let privateKey: string;
 
-    const { privateKeyLocation, installationId, appId } = input;
+    const { privateKeyLocation, installationId, appId, rawResponse } = input;
 
     if (!isValidInput(input)) {
       loader.fail('Input is not valid, either privateKey or privateKeyLocation should be provided');
@@ -74,11 +100,14 @@ export const command = async (input: Input): Promise<void> => {
       privateKey = input.privateKey as string;
     }
 
-    const { token } = await getToken({ privateKey, installationId, appId });
+    const response = await getToken({ privateKey, installationId, appId }, { rawResponse: true });
 
-    loader.stopAndPersist({ text: `The token is: ${token}`, symbol: SUCCESS_SYMBOL });
+    loader.stopAndPersist({
+      text: `The token is: ${response.token} and expires ${response.expiresAt}`,
+      symbol: SUCCESS_SYMBOL,
+    });
 
-    console.log(token);
+    console.log(rawResponse ? response : response.token);
   } catch (e) {
     loader.fail(`We encountered an error: ${e}`);
     process.exit(1);

@@ -20,6 +20,7 @@ program
     '--privateKeyLocation [path/to/the/private.key]',
     'path to the key location, for more information https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#generating-a-private-key '
   )
+  .option('--rawResponse', 'It will return the full response in stringified json format (not just the token)')
 
   .action(getTokenCommand);
 
