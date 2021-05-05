@@ -85,8 +85,8 @@ You can install and use this package in different ways:
 import { getToken } from 'github-app-installation-token';
 
 const { token } = await getToken({
-  appId: '1234',
-  installationId: '112345555', // https://developer.github.com/v3/apps/#list-installations-for-the-authenticated-app
+  appId: 1234,
+  installationId: 112345555, // https://developer.github.com/v3/apps/#list-installations-for-the-authenticated-app
   privateKey: '-----BEGIN RSA PRIVATE KEY----- ......-----END RSA PRIVATE KEY-----', // the private key you took from  the app. https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#generating-a-private-key
 });
 ```
