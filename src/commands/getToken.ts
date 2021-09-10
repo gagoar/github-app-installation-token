@@ -19,6 +19,7 @@ interface GetTokenInput {
   appId: number;
   installationId: number;
   privateKey: string;
+  baseUrl?: string;
 }
 type RequestOptions = RequestRequestOptions & Required<{ rawResponse: true }>;
 type PlainRequest = RequestRequestOptions & { rawResponse?: false };
@@ -32,7 +33,7 @@ export async function getToken(
   requestOptions?: PlainRequest
 ): Promise<Pick<AppsCreateInstallationAccessTokenResponse, 'token'>>;
 export async function getToken(
-  { appId, installationId, privateKey }: GetTokenInput,
+  { appId, installationId, privateKey, baseUrl }: GetTokenInput,
   requestOptions?: PlainRequest | RequestOptions
 ): Promise<Pick<AppsCreateInstallationAccessTokenResponse, 'token'> | AppsCreateInstallationAccessTokenResponse> {
   const key = new NodeRSA(privateKey);
@@ -53,6 +54,7 @@ export async function getToken(
       id: appId,
       privateKey: key.exportKey('pkcs8-private-pem'),
     },
+    baseUrl,
     request,
   });
 
