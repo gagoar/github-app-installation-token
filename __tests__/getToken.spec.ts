@@ -181,4 +181,19 @@ describe('getToken', () => {
       '"Input is not valid, either privateKey or privateKeyLocation should be provided"'
     );
   });
+
+  it('Uses other baseUrl if provided', async () => {
+    const other_url = 'https://test.de';
+    const github = nock(other_url).post(getAccessTokensURL(123456)).reply(201, response);
+
+    const { token } = await getToken({
+      appId: APP_ID,
+      installationId: 123456,
+      privateKey: PRIVATE_KEY,
+      baseUrl: other_url,
+    });
+
+    expect(token).toMatchInlineSnapshot('"secret-installation-token-1234"');
+    expect(github.isDone()).toBe(true);
+  });
 });
