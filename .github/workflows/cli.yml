@@ -1,4 +1,4 @@
-name: Validate
+name: Build Cli
 
 on: [push, pull_request_target]
 
