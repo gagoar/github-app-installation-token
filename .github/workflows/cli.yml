@@ -1,0 +1,25 @@
+name: Validation
+
+on: [push, pull_request_target]
+
+jobs:
+  buildCli:
+    name: Run build-cli
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12.x
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build-cli
+      - name: use cli
+        run: |
+          PRIVATE_KEY="${{ secrets.PRIVATE_KEY }}"
+          cli/cli.js \
+             --appId ${{ secrets.APP_ID }} \
+             --installationId ${{ secrets.INSTALLATION_ID }} \
+             --privateKey="$PRIVATE_KEY"
