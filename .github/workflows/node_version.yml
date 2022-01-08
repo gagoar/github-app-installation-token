@@ -1,0 +1,27 @@
+name: Get node version
+
+on:
+  workflow_call:
+    inputs:
+      nvmrc_location:
+        description: "nvmrc location, by default located at the repository's root"
+        type: string
+        required: false
+        default: '.nvmrc'
+    outputs:
+      node_version:
+        description: 'node version obtained'
+        value: ${{ jobs.setNodeVersion.outputs.NODE_VERSION }}
+
+jobs:
+  setNodeVersion:
+    runs-on: ubuntu-latest
+    outputs:
+      NODE_VERSION: ${{ steps.getVersion.outputs.NODE_VERSION }}
+    steps:
+      - uses: actions/checkout@main
+      - name: Reading ${{ inputs.nvmrc_location }}
+        id: getVersion
+        run: echo "##[set-output name=NODE_VERSION;]$(cat ${{ inputs.nvmrc_location }})"
+      - name: version found ${{ steps.getVersion.outputs.NODE_VERSION }}
+        run: echo ${{ steps.getVersion.outputs.NODE_VERSION }}
