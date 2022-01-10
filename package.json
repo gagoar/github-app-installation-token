@@ -122,7 +122,7 @@
     "@typescript-eslint/parser": "4.14.0",
     "auto-changelog": "2.2.1",
     "esbuild": "0.14.11",
-    "eslint": "7.18.0",
+    "eslint": "7.32.0",
     "eslint-config-prettier": "7.2.0",
     "husky": "4.3.8",
     "jest": "26.6.3",
