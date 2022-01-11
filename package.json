@@ -51,8 +51,7 @@
   "eslintConfig": {
     "extends": [
       "plugin:@typescript-eslint/recommended",
-      "prettier",
-      "prettier/@typescript-eslint"
+      "plugin:prettier/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -118,12 +117,13 @@
     "@types/nock": "11.1.0",
     "@types/node": "13.13.40",
     "@types/node-rsa": "1.1.0",
-    "@typescript-eslint/eslint-plugin": "4.14.0",
-    "@typescript-eslint/parser": "4.14.0",
+    "@typescript-eslint/eslint-plugin": "5.9.1",
+    "@typescript-eslint/parser": "5.9.1",
     "auto-changelog": "2.2.1",
     "esbuild": "0.14.11",
-    "eslint": "7.18.0",
+    "eslint": "8.6.0",
     "eslint-config-prettier": "7.2.0",
+    "eslint-plugin-prettier": "4.0.0",
     "husky": "4.3.8",
     "jest": "26.6.3",
     "jest-mock-process": "1.4.0",
