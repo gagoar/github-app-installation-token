@@ -34,3 +34,5 @@ export const isAppsCreateInstallationAccessTokenResponse = (
 ): response is AppsCreateInstallationAccessTokenResponse => {
   return isObject(response) && typeof response?.token === 'string';
 };
+
+export const isError = (e: unknown): e is Error => e instanceof Error;

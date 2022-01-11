@@ -9,6 +9,7 @@ import { logger } from '../utils/debug';
 import {
   AppsCreateInstallationAccessTokenResponse,
   isAppsCreateInstallationAccessTokenResponse,
+  isError,
 } from '../utils/guards';
 import { readContent } from '../utils/readFile';
 import { Command } from 'commander';
@@ -108,8 +109,10 @@ export const command = async (input: Input): Promise<void> => {
     });
 
     console.log(rawResponse ? response : response.token);
-  } catch (e) {
-    loader.fail(`We encountered an error: ${e}`);
+  } catch (e: unknown) {
+    if (isError(e)) {
+      loader.fail(`We encountered an error: ${e.message}`);
+    }
     process.exit(1);
   }
 };
