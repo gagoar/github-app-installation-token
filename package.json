@@ -129,7 +129,7 @@
     "jest-mock-process": "1.4.0",
     "lint-staged": "10.5.3",
     "nock": "13.2.2",
-    "pkg": "4.5.1",
+    "pkg": "5.5.2",
     "prettier": "2.5.1",
     "prettier-eslint": "12.0.0",
     "prettier-eslint-cli": "5.0.1",
