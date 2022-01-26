@@ -1,6 +1,6 @@
 import ora from 'ora';
 import { Octokit } from '@octokit/rest';
-import { RequestRequestOptions } from '@octokit/types';
+import type { RequestRequestOptions } from '@octokit/types';
 import { createAppAuth } from '@octokit/auth-app';
 import NodeRSA from 'node-rsa';
 
@@ -12,7 +12,7 @@ import {
   isError,
 } from '../utils/guards';
 import { readContent } from '../utils/readFile';
-import { Command } from 'commander';
+import type { Command } from 'commander';
 
 const debug = logger('generate');
 // just left the async signature to make it easier in the future
