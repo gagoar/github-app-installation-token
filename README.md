@@ -63,7 +63,7 @@ You can install and use this package in different ways:
   npm -g install github-app-installation-token
 
   npm run github-app-installation-token \
-      --appID <APP_ID> \
+      --appId <APP_ID> \
       --installationId <INSTALLATION_ID> \
       --privateKeyLocation <path/to/the/private.pem>
 ```
