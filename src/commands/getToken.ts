@@ -112,7 +112,7 @@ export const command = async (input: Input): Promise<void> => {
     );
 
     loader.stopAndPersist({
-      text: `Herr token is: ${response.token} and expires ${response.expiresAt}`,
+      text: `The token is: ${response.token} and expires ${response.expiresAt}`,
       symbol: SUCCESS_SYMBOL,
     });
 

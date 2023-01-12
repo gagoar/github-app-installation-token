@@ -196,4 +196,19 @@ describe('getToken', () => {
     expect(token).toMatchInlineSnapshot('"secret-installation-token-1234"');
     expect(github.isDone()).toBe(true);
   });
+
+  it('Takes a list of repository names', async () => {
+    const repos = ['repo1', 'repo2'];
+    const github = nock(GITHUB_URL).post(getAccessTokensURL(123456)).reply(201, response);
+
+    const { token } = await getToken({
+      appId: APP_ID,
+      installationId: 123456,
+      privateKey: PRIVATE_KEY,
+      repositoryNames: repos,
+    });
+
+    expect(token).toMatchInlineSnapshot('"secret-installation-token-1234"');
+    expect(github.isDone()).toBe(true);
+  });
 });
