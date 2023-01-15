@@ -6,10 +6,7 @@ import { getTokenCommand } from '../commands';
 
 program.name(packageJSON.name).description(packageJSON.description).version(packageJSON.version);
 
-function collectRepos(value: string, previous: string[]) {
-  return previous.concat([value]);
-}
-
+const collectRepos = (value: string, previous: string[]) => [...previous, value];
 program
   .requiredOption('--appId <appID>', 'Github App ID')
   .requiredOption(
