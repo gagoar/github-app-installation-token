@@ -6,7 +6,6 @@ import { getTokenCommand } from '../commands';
 
 program.name(packageJSON.name).description(packageJSON.description).version(packageJSON.version);
 
-const collectRepos = (value: string, previous: string[]) => [...previous, value];
 program
   .requiredOption('--appId <appID>', 'Github App ID')
   .requiredOption(
@@ -26,7 +25,12 @@ program
     '--baseUrl <baseUrl>',
     'Change the base url for github request. For example if used on a Github Enterprise Server instance.'
   )
-  .option('-r, --repo <name>', 'Allow access to a single repository', (value: string, previous: string[]) => [...previous, value], [])
+  .option(
+    '-r, --repo <name>',
+    'Allow access to a single repository',
+    (value: string, previous: string[]) => [...previous, value],
+    []
+  )
 
   .action(getTokenCommand);
 
