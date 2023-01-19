@@ -25,6 +25,12 @@ program
     '--baseUrl <baseUrl>',
     'Change the base url for github request. For example if used on a Github Enterprise Server instance.'
   )
+  .option(
+    '-r, --repo <name>',
+    'Allow access to a single repository',
+    (value: string, previous: string[]) => [...previous, value],
+    []
+  )
 
   .action(getTokenCommand);
 

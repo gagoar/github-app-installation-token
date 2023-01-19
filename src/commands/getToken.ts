@@ -21,6 +21,7 @@ interface GetTokenInput {
   installationId: number;
   privateKey: string;
   baseUrl?: string;
+  repositoryNames?: string[];
 }
 type RequestOptions = RequestRequestOptions & Required<{ rawResponse: true }>;
 type PlainRequest = RequestRequestOptions & { rawResponse?: false };
@@ -34,7 +35,7 @@ export async function getToken(
   requestOptions?: PlainRequest
 ): Promise<Pick<AppsCreateInstallationAccessTokenResponse, 'token'>>;
 export async function getToken(
-  { appId, installationId, privateKey, baseUrl }: GetTokenInput,
+  { appId, installationId, privateKey, baseUrl, repositoryNames }: GetTokenInput,
   requestOptions?: PlainRequest | RequestOptions
 ): Promise<Pick<AppsCreateInstallationAccessTokenResponse, 'token'> | AppsCreateInstallationAccessTokenResponse> {
   const key = new NodeRSA(privateKey);
@@ -62,6 +63,7 @@ export async function getToken(
   const response = await octokit.auth({
     type: 'installation',
     installationId,
+    repositoryNames,
   });
 
   if (!isAppsCreateInstallationAccessTokenResponse(response)) {
@@ -76,6 +78,7 @@ type Input = Omit<Command & GetTokenInput, 'privateKey'> & {
   privateKeyLocation?: string;
   privateKey?: string;
   rawResponse?: boolean;
+  repo?: string[];
 };
 
 const isValidInput = (input: Input): boolean => {
@@ -90,7 +93,7 @@ export const command = async (input: Input): Promise<void> => {
   try {
     let privateKey: string;
 
-    const { privateKeyLocation, installationId, appId, rawResponse } = input;
+    const { privateKeyLocation, installationId, appId, rawResponse, baseUrl, repo } = input;
 
     if (!isValidInput(input)) {
       loader.fail('Input is not valid, either privateKey or privateKeyLocation should be provided');
@@ -103,7 +106,10 @@ export const command = async (input: Input): Promise<void> => {
       privateKey = input.privateKey as string;
     }
 
-    const response = await getToken({ privateKey, installationId, appId }, { rawResponse: true });
+    const response = await getToken(
+      { privateKey, installationId, appId, baseUrl, repositoryNames: repo },
+      { rawResponse: true }
+    );
 
     loader.stopAndPersist({
       text: `The token is: ${response.token} and expires ${response.expiresAt}`,
