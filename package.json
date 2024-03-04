@@ -112,7 +112,7 @@
     "ora": "6.0.1"
   },
   "devDependencies": {
-    "@types/debug": "4.1.7",
+    "@types/debug": "4.1.12",
     "@types/jest": "26.0.24",
     "@types/node": "16.18.14",
     "@types/node-rsa": "1.1.1",
