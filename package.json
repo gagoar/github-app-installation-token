@@ -109,7 +109,7 @@
     "commander": "6.2.1",
     "debug": "4.3.4",
     "node-rsa": "1.1.1",
-    "ora": "6.0.1"
+    "ora": "6.3.1"
   },
   "devDependencies": {
     "@types/debug": "4.1.12",
