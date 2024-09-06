@@ -107,7 +107,7 @@
     "@octokit/auth-app": "3.6.1",
     "@octokit/rest": "18.12.0",
     "commander": "6.2.1",
-    "debug": "4.3.4",
+    "debug": "4.3.7",
     "node-rsa": "1.1.1",
     "ora": "6.0.1"
   },
