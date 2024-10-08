@@ -114,7 +114,7 @@
   "devDependencies": {
     "@types/debug": "4.1.12",
     "@types/jest": "26.0.24",
-    "@types/node": "16.18.14",
+    "@types/node": "16.18.113",
     "@types/node-rsa": "1.1.4",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
