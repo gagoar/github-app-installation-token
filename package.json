@@ -107,12 +107,12 @@
     "@octokit/auth-app": "3.6.1",
     "@octokit/rest": "18.12.0",
     "commander": "6.2.1",
-    "debug": "4.3.4",
+    "debug": "4.4.3",
     "node-rsa": "1.1.1",
     "ora": "6.0.1"
   },
   "devDependencies": {
-    "@types/debug": "4.1.12",
+    "@types/debug": "4.1.13",
     "@types/jest": "26.0.24",
     "@types/node": "16.18.14",
     "@types/node-rsa": "1.1.4",
